@@ -4,5 +4,5 @@ SimplePy is a package of useful, easy to use functions and classes for processin
 #### Libraries
 functionality includes:
 * simple_csv: a group of functions built to make csv_writing and reading simplified
-* simple_sqlite: a class that simplifies the interface for sqlite3 instances
+* simple_db: a class that simplifies the interface for database instances that are DB API 2.0 compliant
 * and more to come

@@ -23,7 +23,7 @@ def save(filename, headers=[], data=[], delimiter=',', quotechar='\"', quoting=c
             writer.writerow(headers)
         [writer.writerow(row) for row in data]
 
-def append(filename, data=[], delimiter=',', quotechar='\"'):
+def append(filename, data=[], delimiter=',', quotechar='\"', quoting=csv.QUOTE_MINIMAL):
     with open(filename, 'a', newline='') as f:
         writer = csv.writer(f, delimiter=delimiter, quotechar=quotechar, quoting=quoting)
         [writer.writerow(row) for row in data]

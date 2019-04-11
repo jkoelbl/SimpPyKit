@@ -5,14 +5,14 @@ with open('README.md') as f:
 
 setup(
    name='SimpPyKit',
-   version='',
-   description='',
+   version='0.1',
+   description='Package containing wrapper functions and classes for ease of use',
    license='',
    long_description=long_description,
-   author='SimpPyKit',
+   author='Jordan Koelbl',
    author_email='',
-   url='',
-   packages=[''],         #same as name
+   url='http://github.com/jkoelbl/SimpPyKit',
+   packages=['SimpPyKit'],         #same as name
    install_requires=[],     #external packages as dependencies
    scripts=[]
 )

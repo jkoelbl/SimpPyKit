@@ -1,9 +1,21 @@
+import sys
+
 class database:
+    __slots__ = ['connection', 'cursor']
     def __init__(self, config, db_type):
-        self.connection = db_type.connect(**config)
-        self.cursor = self.connection.cursor()
-    
+        self.connection, self.cursor = None, None
+        try:
+            self.connection = db_type.connect(**config)
+            self.cursor = self.connection.cursor()
+        except Exception as e:
+            print(e, file=sys.stderr)
+
+    def connected(self):
+        return not self.connection is None
+
     def query(self, query, arg=(), value='all'):
+        if not self.connected():
+            return
         self.cursor.execute(query, arg)
         query_split = query.lower().strip().split()
         if query_split[0] in ('show','describe','select'):
@@ -18,20 +30,27 @@ class database:
         self.connection.commit()
 
     def description(self):
+        if not self.connected():
+            return
         return self.cursor.description
-    
+
     def __iter__(self):
+        if not self.connected():
+            return
         return self.cursor.fetchall()
 
     def __next__(self):
+        if not self.connected():
+            return
         return self.cursor.fetch()
 
     def __del__(self):
-        self.cursor.close()
+        if not self.connected():
+            return
         self.connection.close()
-    
+
     def __enter__(self):
         return self
-    
+
     def __exit__(self, key, value, tracepath):
         del self
